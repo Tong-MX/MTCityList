@@ -7,6 +7,8 @@
 //
 
 #import "ViewController.h"
+#import "MTCityManager.h"
+#import "MTCityViewController.h"
 
 @interface ViewController ()
 
@@ -16,8 +18,19 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    [MTCityManager writeProvinceCityToFile];
+    UIButton *btn = [UIButton buttonWithTitle:@"开始" titleFont:14 titleColor:[UIColor whiteColor] backgroundColor:COLOR_16(0x141313, 1) target:self action:@selector(clickAction)];
+    [self.view addSubview:btn];
+    
+    [btn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(self.view);
+        make.centerY.equalTo(self.view);
+    }];
 }
 
+- (void)clickAction {
+    MTCityViewController *controller = [[MTCityViewController alloc] init];
+    [self.navigationController pushViewController:controller animated:YES];
+}
 
 @end
